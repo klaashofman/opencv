@@ -30,10 +30,12 @@ while(True):
 	
 	# example of processing different keys
 	pressedKey = cv2.waitKey(1) & 0xFF
+	# 'q' quits the program
 	if pressedKey == ord('q'): 
 		break
+	# 'r' rotates the image countet clockwise
 	if pressedKey == ord('r'):
-		rotation = rotation + 9q0
+		rotation = rotation + 90
 		if rotation == 360:
 			rotation = 0
 		print(rotation)
