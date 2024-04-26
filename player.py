@@ -17,7 +17,9 @@ while(cap.isOpened()):
     if cv2.waitKey(25) & 0xFF == ord('q'):
       break
   else: 
-    break
+    print ("no frame, resterting video")
+    cap.set(cv2.CAP_PROP_POS_FRAMES, 0)
+    continue
 
 cap.release()
 cv2.destroyAllWindows()
