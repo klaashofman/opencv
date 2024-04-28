@@ -9,10 +9,15 @@ framesize=(800,480)
 # videodir="/Users/klaashofman/Development/Rimshot/sandbox/opencv/video"
 videodir="video"
 
+# set the video to full screen
 fullscreen = False
+
+# play audio
 playaudio = True
 
+
 def play(file, framesize=(800,480)):
+    rv = True
     cap = cv2.VideoCapture(file)
     player = MediaPlayer(file) if playaudio else None
 
@@ -30,18 +35,26 @@ def play(file, framesize=(800,480)):
         if ret == True:
             frame = cv2.resize(frame, framesize)
             cv2.imshow('Frame', frame)
-            if cv2.waitKey(25) & 0xFF == ord('q'):
-                break
+            
         else: 
-            print ("eof")
+            print ("eof video")
             break
         
         if playaudio and val != 'eof' and audio_frame is not None:
             #audio
             img, t = audio_frame
 
+        elif playaudio and val == 'eof':
+            print("eof audio")
+            break
+        
+        if cv2.waitKey(25) & 0xFF == ord('q'):
+            rv = False
+            break
+
     cap.release()
     cv2.destroyAllWindows()
+    return rv
 
 if __name__ == "__main__":
     # find all video files in the current directory
@@ -50,4 +63,5 @@ if __name__ == "__main__":
     # play all in a loop
     while True:
         for file in files:
-            play(file, framesize)
+            if not play(file, framesize):
+                exit(0)
