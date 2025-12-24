@@ -1,0 +1,12 @@
+[project]
+name = "opencv"
+version = "0.1.0"
+description = "OpenCV video processing project"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "opencv-python>=4.8.0",
+    "numpy>=1.24.0",
+    "mediapipe>=0.10.0",
+    "ffpyplayer>=4.5.3",
+]
